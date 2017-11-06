@@ -42,7 +42,8 @@ public class Worker implements Runnable {
             Object work = workQueue.poll();
             if (work == null)
                 break;
-            resultMap.put(Integer.toString(work.hashCode()), this.handle(work));
+            resultMap.put(Integer.toString(work.hashCode()), (Object) Thread.currentThread().getName() + "---" + this.handle(work));
+//            resultMap.put(Integer.toString(work.hashCode()), this.handle(work));
         }
     }
 }

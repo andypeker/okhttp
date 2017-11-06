@@ -27,7 +27,8 @@ public class Master {
             workerCount = 5;
      /*根据workerCount，创建指定数量的工作线程Worker*/
         for (int i = 0; i < workerCount; i++) {
-            threadMap.put(Integer.toString(i), new Thread(worker, Integer.toString(i)));
+//            threadMap.put(Integer.toString(i), new Thread(worker, Integer.toString(i)));
+            threadMap.put(Integer.toString(i), new Thread(worker, "thread-" + i));
         }
     }
 

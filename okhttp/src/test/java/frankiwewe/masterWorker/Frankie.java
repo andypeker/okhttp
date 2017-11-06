@@ -1,4 +1,4 @@
-package  frankiwewe.masterWorker;
+package frankiwewe.masterWorker;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ public class Frankie {
     public void executeCubic() {
 
         //创建三个Worker线程，执行任务
-        Master master = new Master(new Worker(), 3);
+        Master master = new Master(new Worker(), 5);
 
         for (int i = 0; i < 100; i++) {
             master.submit(i);
@@ -28,20 +28,22 @@ public class Frankie {
         Map<String, Object> resultMap = master.getResultMap();
 
         while (resultMap.size() > 0 || !master.isComplete()) {
-
+//            System.out.println("Result-While");
             String key = null;
             Integer i = null;
+            String rslt = null;
 
             for (String k : resultMap.keySet()) {
-
                 key = k;
                 break;
             }
 
             if (key != null) {
-                i = (Integer) resultMap.get(key);
+//                i = resultMap.get(key);
+                rslt = String.valueOf(resultMap.get(key));
                 //从结果集中移除倍计算过的key
                 resultMap.remove(key);
+                System.out.println("Result: " + rslt);
             }
 
             if (i != null) {
@@ -52,10 +54,7 @@ public class Frankie {
 
 
     public static void main(String[] args){
-
         Frankie  fr = new Frankie();
         fr.executeCubic();
-
     }
-
 }
